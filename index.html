@@ -1,0 +1,386 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bootstrap | Exemplo responsivo</title>
+
+    <!-- Conectando o Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">
+
+    <link rel="icon" type="image/png" sizes="32x32"
+      href="https://getbootstrap.com/docs/5.3/assets/img/favicons/favicon-32x32.png">
+
+    <style>
+        body {
+            min-height: 100vh;
+            background:
+                radial-gradient(ellipse at top left, rgba(124, 58, 237, 0.35), transparent 45%),
+                linear-gradient(145deg, #2e1065, #08040f 75%);
+        }
+
+        .navbar {
+            background-color: rgba(15, 23, 42, 0.88) !important;
+            backdrop-filter: blur(12px);
+        }
+
+        .navbar-brand {
+            letter-spacing: -0.04em;
+        }
+
+        .brand-icon {
+            color: #a78bfa;
+            font-size: 2.5rem;
+        }
+
+        .brand-name {
+            font-size: 1.75rem;
+        }
+
+        .nav-link {
+            border-radius: 0.5rem;
+            transition: background-color 180ms ease, color 180ms ease;
+        }
+
+        .nav-link:hover,
+        .nav-link:focus-visible {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff !important;
+        }
+
+        .intro {
+            background-color: rgba(15, 23, 42, 0.72);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.2);
+        }
+
+        .intro-copy {
+            max-width: 38rem;
+            margin-inline: auto;
+            color: #cbd5e1;
+        }
+
+        .info-section {
+            padding-block: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+        }
+
+        .info-section h2 {
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .info-section p {
+            max-width: 42rem;
+            color: #cbd5e1;
+            line-height: 1.8;
+        }
+
+        .info-section a {
+            color: #c4b5fd;
+            text-decoration-color: rgba(196, 181, 253, 0.5);
+            text-underline-offset: 0.2em;
+        }
+
+        .info-section a:hover {
+            color: #fff;
+        }
+
+        .card {
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 1rem;
+            transition: transform 180ms ease, box-shadow 180ms ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.22);
+        }
+
+        .card-title {
+            font-weight: 700;
+        }
+
+        .js-detalhes {
+            transition: transform 180ms ease, box-shadow 180ms ease;
+        }
+
+        .js-detalhes:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.18);
+        }
+
+        .js-detalhes:focus-visible,
+        .nav-link:focus-visible,
+        .info-section a:focus-visible {
+            outline: 2px solid #c4b5fd;
+            outline-offset: 3px;
+        }
+
+        #sobre,
+        #contato {
+            scroll-margin-top: 1.5rem;
+        }
+
+        footer {
+            border-top: 1px solid rgba(196, 181, 253, 0.18);
+        }
+
+        @media (max-width: 575.98px) {
+            .navbar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.25rem;
+            }
+
+            .navbar-brand {
+                text-align: center;
+                justify-content: center;
+            }
+
+            .brand-icon {
+                font-size: 2rem;
+            }
+
+            .brand-name {
+                font-size: 1.5rem;
+            }
+
+            .navbar-nav {
+                position: static !important;
+                transform: none !important;
+                justify-content: center;
+                align-self: center;
+                margin-left: 0 !important;
+            }
+
+            .nav-link {
+                padding-inline: 0.5rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                transition-duration: 0.01ms !important;
+            }
+        }
+        .revelar {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .visivel {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .modal-personalizado {
+            background: linear-gradient(135deg, #17112b, #2e1065);
+            color: #fff;
+            border: 1px solid #8b5cf6;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.4);
+        }
+
+        #detalhesCabecalho {
+            background-color: #4c1d95;
+            color: #fff;
+            border-bottom: 1px solid #8b5cf6;
+        }
+
+        #detalhesIcone {
+            font-size: 1.5rem;
+        }
+
+        .modal-personalizado .modal-body {
+            line-height: 1.8;
+        }
+    </style>
+</head>
+
+<body id="inicio">
+
+
+    <header class="container mt-4">
+        <nav class="navbar navbar-expand bg-dark rounded-4 shadow p-2 p-sm-3" aria-label="Navegação principal">
+
+            <a class="navbar-brand text-white fw-bold mb-0 d-flex align-items-center" href="#inicio">
+                <i class="bi bi-bootstrap-fill brand-icon me-2"></i>
+                <span class="brand-name">Bootstrap</span>
+            </a>
+
+            <ul class="navbar-nav flex-row gap-1 gap-sm-2 position-absolute start-50 translate-middle-x">
+                <li class="nav-item">
+                    <a class="nav-link text-white px-2 px-sm-3" href="#inicio">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-white px-2 px-sm-3" href="#sobre">Sobre</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-white px-2 px-sm-3" href="#contato">Contato</a>
+                </li>
+            </ul>
+
+        </nav>
+    </header>
+
+    <main id="produtos" class="container my-4 my-md-5 intro text-white p-3 p-md-5 rounded-4">
+
+        <div class="text-center mb-4 mb-md-5">
+            <h1 class="text-info text-uppercase fw-semibold fs-3 mb-2">Nossos Produtos</h1>
+        </div>
+
+        <div class="row g-3">
+
+            <!-- Misturando cores em cards com bootstrap -->
+            <div class="col-md-6">
+                <div class="card h-100 border-primary bg-primary text-white shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Produto 1</h5>
+                        <p class="card-text">Notebook</p>
+                        <button type="button" class="btn btn-outline-light js-detalhes" id="Notebook">Ver detalhes</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="col-md-6">
+                <div class="card h-100 border-success bg-success text-white shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Produto 2</h5>
+                        <p class="card-text">Smartphone</p>
+                        <button type="button" class="btn btn-outline-light js-detalhes" id="Celular">Ver detalhes</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="col-md-6">
+                <div class="card h-100 border-warning bg-warning bg-gradient text-dark shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Produto 3</h5>
+                        <p class="card-text">Mouse</p>
+                        <button type="button" class="btn btn-dark js-detalhes" id="Mouse">Ver detalhes</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="col-md-6">
+                <div class="card h-100 border-info bg-info text-dark shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Produto 4</h5>
+                        <p class="card-text">Teclado</p>
+                        <button type="button" class="btn btn-dark js-detalhes" id="Teclado">Ver detalhes</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <div class="modal fade" id="detalhesModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content modal-personalizado">
+                <div class="modal-header" id="detalhesCabecalho">
+                    <h5 class="modal-title d-flex align-items-center gap-2">
+                        <i id="detalhesIcone" class="bi bi-laptop"></i>
+                        <span>Detalhes do Produto</span>
+                    </h5>
+
+                    <button
+                        type="button"
+                        class="btn-close btn-close-white"
+                        data-bs-dismiss="modal"
+                        aria-label="Fechar"
+                    ></button>
+                </div>
+
+                <div class="modal-body">
+                    <p id="detalhesTexto"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="sobre" class="revelar container info-section text-white my-4 my-md-5">
+        <h2 class="h3 mb-3">Sobre Nós</h2>
+        <p class="mb-0">Bem-vindo à nossa loja! Somos especialistas em tecnologia e nos dedicamos a oferecer os melhores produtos e serviços para nossos clientes.</p>
+    </section>
+
+    <section id="contato" class="revelar container info-section text-white my-4 my-md-5">
+        <h2 class="h3 mb-3">Contato</h2>
+        <p class="mb-0">Entre em contato conosco através do e-mail: <a href="mailto:contato@nossaloja.com">contato@nossaloja.com</a></p>
+    </section>
+
+    <footer class="container py-3">
+        <p class="text-center text-white-50 small mb-0">&copy; 2026 Meu Site. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Conectando o Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const navbar = document.querySelector('.navbar');
+        const js_detalhes = document.querySelectorAll('.js-detalhes');
+        const modal = document.getElementById('detalhesModal');
+        const detalhesTexto = document.getElementById('detalhesTexto');
+        const detalhesIcone = document.getElementById('detalhesIcone');
+        const detalhesCabecalho = document.getElementById('detalhesCabecalho');
+
+        js_detalhes.forEach(function (detalhe) {
+            detalhe.addEventListener('click', function () {
+                if (detalhe.id == 'Notebook') {
+                    detalhesTexto.textContent = 'Detalhes do produto Notebook: \n\n- Tela: 15.6 polegadas\n- Processador: Intel Core i7\n- Memória RAM: 16GB\n- Armazenamento: SSD 512GB\n- Sistema Operacional: Windows 10';
+                    detalhesIcone.className = 'bi bi-laptop';
+                    detalhesCabecalho.style.backgroundColor = '#0d6efd';
+                    new bootstrap.Modal(modal).show();
+                } else if (detalhe.id == 'Celular') {
+                    detalhesTexto.textContent = 'Detalhes do produto Smartphone: \n\n- Tela: 6.5 polegadas\n- Processador: Snapdragon 888\n- Memória RAM: 8GB\n- Armazenamento: 128GB\n- Sistema Operacional: Android 11';
+                    detalhesIcone.className = 'bi bi-phone';
+                    detalhesCabecalho.style.backgroundColor = '#198754';
+                    detalhesCabecalho.style.color = '#fff';
+                    new bootstrap.Modal(modal).show();
+                } else if (detalhe.id == 'Mouse') {
+                    detalhesTexto.textContent = 'Detalhes do produto Mouse: \n\n- Tipo: Óptico\n- Conexão: USB\n- Botões: 3\n- Resolução: 1600 DPI';
+                    detalhesIcone.className = 'bi bi-mouse';
+                    detalhesCabecalho.style.backgroundColor = '#ffc107';
+                    detalhesCabecalho.style.color = '#212529';
+                    new bootstrap.Modal(modal).show();
+                } else if (detalhe.id == 'Teclado') {
+                    detalhesTexto.textContent = 'Detalhes do produto Teclado: \n\n- Tipo: Mecânico\n- Teclas: 104\n- Conexão: USB\n- Iluminação: RGB';
+                    detalhesIcone.className = 'bi bi-keyboard';
+                    detalhesCabecalho.style.backgroundColor = '#0dcaf0';
+                    detalhesCabecalho.style.color = 'white';
+                    new bootstrap.Modal(modal).show();
+                }
+            });
+        });
+
+        const revelar = document.querySelectorAll('.revelar');
+
+        const observer = new IntersectionObserver((entradas) => {
+            entradas.forEach((entrada) => {
+                if (entrada.isIntersecting) {
+                    entrada.target.classList.add('visivel');
+                }
+            });
+        });
+
+        revelar.forEach((secao) => {
+            observer.observe(secao);
+        });
+    </script>
+</body>
+</html>
